@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<agps_profiles version="1">
+
+  <!--  slp_name: default slp name to be shown in AGPS
+	backup_slp_name_var: mui slp name variable in string.xml(optional) 
+	address: SLP address
+	show_type: whether show this profile or not, 0:always show  1:only show in engineer mode  2:show according to current operator
+   -->
+
+  <!-- CUSTOM-->
+  <agps_profile code="CUSTOM"
+      slp_name="CUSTOM"
+      backup_slp_name_var="CUSTOM_SPL_Name"
+      address="127.0.0.1"
+      port="0"
+      tls="0"
+      show_type="1"
+  />
+  
+  <!-- NOKIA-->
+  <!--
+  <agps_profile code="NOKIA"
+      slp_name="NOKIA"
+      backup_slp_name_var="NOKIA_SPL_Name"
+      address="supl.nokia.com"
+      port="7275"
+      tls="1"
+      show_type="0"
+  />
+ -->
+
+  <!-- GOOGLE-->
+  <agps_profile code="GOOGLE"
+      slp_name="GOOGLE"
+      backup_slp_name_var="GOOGLE_SPL_Name"
+      address="supl.google.com"
+      port="7275"
+      tls="1"
+      show_type="0"
+  />
+
+  <!-- ORANGE 00-->
+  <agps_profile code="20800"
+      slp_name="ORANGE 00"
+      backup_slp_name_var="ORANGE00_SPL_Name"
+      address="agpss.orange.fr"
+      port="7275"
+      tls="1"
+      show_type="2"
+  />
+  <!-- ORANGE 01-->
+  <agps_profile code="20801"
+      slp_name="ORANGE 01"
+      backup_slp_name_var="ORANGE01_SPL_Name"
+      address="agpss.orange.fr"
+      port="7275"
+      tls="1"
+      show_type="2"
+  />
+  <!-- ORANGE 02-->
+  <agps_profile code="20802"
+      slp_name="ORANGE 02"
+      backup_slp_name_var="ORANGE02_SPL_Name"
+      address="agpss.orange.fr"
+      port="7275"
+      tls="1"
+      show_type="2"
+  />
+
+  <!-- CMCC-->
+  <agps_profile code="46000"
+      slp_name="China Mobile AGPS server"
+      backup_slp_name_var="CMCC_SPL_Name"
+      address="221.176.0.55"
+      port="7275"
+      tls="1"
+      show_type="2"
+      app_id="ap0004"
+      provider_id="221.176.0.55"
+      default_apn="CMCC WAP"
+      optional_apn="CMNET"
+      optional_apn_2=""
+      address_type="IPv4address:port"
+  />
+
+  <!-- CMCC2-->
+  <agps_profile code="46002"
+      slp_name="China Mobile AGPS server"
+      backup_slp_name_var="CMCC_SPL_Name"
+      address="221.176.0.55"
+      port="7275"
+      tls="1"
+      show_type="2"
+      app_id="ap0004"
+      provider_id="221.176.0.55"
+      default_apn="CMCC WAP"
+      optional_apn="CMNET"
+      optional_apn_2=""
+      address_type="IPv4address:port"
+  />
+  
+  <!-- CMCC TD-->
+  <agps_profile code="46007"
+      slp_name="China Mobile AGPS server"
+      backup_slp_name_var="CMCC_SPL_Name"
+      address="221.176.0.55"
+      port="7275"
+      tls="1"
+      show_type="2"
+      app_id="ap0004"
+      provider_id="221.176.0.55"
+      default_apn="CMCC WAP"
+      optional_apn="CMNET"
+      optional_apn_2=""
+      address_type="IPv4address:port"
+  />
+
+  <!-- Vodafone-->
+  <agps_profile code="Vodafone"
+      slp_name="Vodafone"
+      backup_slp_name_var="Vodafone_SPL_Name"
+      address="supl.vodafone.com"
+      port="7275"
+      tls="1"
+      show_type="0"
+  />
+
+  <!-- CHUAN HWA
+  <agps_profile code="46692"
+      slp_name="Chunghwa"
+      backup_slp_name_var="CHUANHWA_SPL_Name"
+      address="10.1.101.137"
+      port="8025"
+      tls="0"
+      show_type="2"
+  />
+	-->
+	
+  <!-- China Unicom Test 
+  <agps_profile code="46001"
+      slp_name="China Unicom"
+      backup_slp_name_var="CU_SPL_Name"
+      address="172.0.0.1"
+      port="8025"
+      tls="0"
+      show_type="2"
+  />
+  -->
+  
+    <!-- The following parameters are provided  for customer to 
+    configure A-GPS default value.
+   -->
+  <!--  
+  default_profile:
+      the default profile when device first boot up.
+      Available vaule: NOKIA, GOOGLE 
+  disable_after_reboot:
+      whether to enable A-GPS when device sencond boot up.
+      Available vaule: yes, no
+  ni_request:
+      whether enable network to request user position.
+      Available vaule: yes, no
+  agps_enable:
+      whether to permit enable A-GPS when the first boot up.
+      Available vaule: yes, no
+  log_file_max_num:
+      the max number of log file can be saved in /data/agps_supl/log.
+      Available vaule: 1~100
+  cp_gemini_pref_sim:
+      for cp gemini, set the preferred sim card to use. 
+      Available vaule: 1 (it means use sim1 as prefrerred) 
+      Available vaule: 2 (it means use sim2 as prefrerred)
+   network_used:
+      set to use A-GPS under local network or local & roaming network
+      Available vaule: 0, 1 (0 meas only local network; 1 means local & roaming network)
+  -->
+  <!--
+  <agps_conf_para
+      default_profile="GOOGLE"
+      disable_after_reboot="no"
+      ni_request="yes"
+      agps_enable="yes"
+      log_file_max_num="10"
+      cp_gemini_pref_sim="1"
+      network_used="1"
+  />
+  -->
+  <agps_conf_para
+      agps_enable="yes"
+      ca_enable="no"
+      cdma_agps_preferred="0"
+      cp_auto_reset="no"
+      cp_gemini_pref_sim="1"
+      cp_up_selection="up"
+      default_cdma_profile="CDMA1"
+      default_profile="GOOGLE"
+      disable_after_reboot="no"
+      ecid_enable="yes"
+      gpevt="no"
+      log_file_max_num="10"
+      network_used="0"
+      ni_request="yes"
+      notify_timeout="8"
+      roaming="no"
+      si_mode="mb"
+      supl_version="1"
+      verify_timeout="8"
+   />
+</agps_profiles>
