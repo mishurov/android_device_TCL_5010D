@@ -14,7 +14,7 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Recovery allowed devices
-TARGET_OTA_ASSERT_DEVICE := 5010D,hct6580_weg_c_m
+TARGET_OTA_ASSERT_DEVICE := 5010D,hct6580_weg_c_m,Pixi4
 
 PRODUCT_PACKAGES += \
    libxlog

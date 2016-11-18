@@ -193,6 +193,8 @@ ro.camera_shutter_sound_setting=yes
 rild.libpath=/system/lib/mtk-ril.so
 rild.libargs=-d /dev/ttyC0
 
+ro.telephony.ril_class=MediaTekRIL
+ro.telephony.ril.config=fakeiccid
 
 # MTK, Infinity, 20090720 {
 wifi.interface=wlan0
