@@ -224,4 +224,4 @@ PRODUCT_PACKAGES += \
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=8
 
 # Dalvik
-$(call inherit-product-if-exists, frameworks/native/build/phone-hdpi-dalvik-heap.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-hdpi-2048-dalvik-heap.mk)
