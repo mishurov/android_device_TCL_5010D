@@ -1,35 +1,37 @@
-From 2914a74b5c21585ef16e2b76721ea48ca1bc835d Mon Sep 17 00:00:00 2001
-From: Wang Xuerui <idontknw.wang@gmail.com>
-Date: Tue, 25 Aug 2015 02:49:19 +0800
-Subject: [PATCH 1/2] libmedia: stub out MTK-specific bits, audio working
-
-Change-Id: I2b437e41599d0262838f86e794bfc887acc82821
----
- media/libmedia/Android.mk         |   9 ++
- media/libmedia/mtkaudio_stubs.cpp | 215 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 224 insertions(+)
- create mode 100644 media/libmedia/mtkaudio_stubs.cpp
-
 diff --git a/media/libmedia/Android.mk b/media/libmedia/Android.mk
-index 139d6f8..109ab26 100644
+index efcd541..70a5a24 100644
 --- a/media/libmedia/Android.mk
 +++ b/media/libmedia/Android.mk
-@@ -124,6 +124,15 @@ LOCAL_C_INCLUDES := \
+@@ -7,7 +7,7 @@ LOCAL_SRC_FILES:= \
+ LOCAL_MODULE:= libmedia_helper
+ LOCAL_MODULE_TAGS := optional
+ 
+-LOCAL_C_FLAGS += -Werror -Wno-error=deprecated-declarations -Wall
++LOCAL_C_FLAGS += -Werror -Wno-error=deprecated-declarations -Wno-unused-parameter
+ LOCAL_CLANG := true
+ 
+ include $(BUILD_STATIC_LIBRARY)
+@@ -68,8 +68,8 @@ LOCAL_SRC_FILES:= \
+     Visualizer.cpp \
+     MemoryLeakTrackUtil.cpp \
+     StringArray.cpp \
+-    AudioPolicy.cpp
+-
++    AudioPolicy.cpp \
++    mtkaudio_stubs.cpp
+ 
+ #QTI Resampler
+ ifeq ($(call is-vendor-board-platform,QCOM), true)
+@@ -98,6 +98,9 @@ LOCAL_C_INCLUDES := \
      $(call include-path-for, audio-effects) \
      $(call include-path-for, audio-utils)
  
-+
-+ifeq ($(MTK_HARDWARE),true)
-+LOCAL_SRC_FILES += \
-+    mtkaudio_stubs.cpp
-+
 +# StrongPointer.h
 +LOCAL_C_INCLUDES += $(TOP)/frameworks/rs/server
-+endif
 +
- include $(BUILD_SHARED_LIBRARY)
+ LOCAL_CFLAGS += -Werror -Wno-error=deprecated-declarations -Wall
+ LOCAL_CLANG := true
  
- include $(CLEAR_VARS)
 diff --git a/media/libmedia/mtkaudio_stubs.cpp b/media/libmedia/mtkaudio_stubs.cpp
 new file mode 100644
 index 0000000..f67277c
@@ -251,6 +253,3 @@ index 0000000..f67277c
 +IMPLEMENT_META_INTERFACE(ATVCtrlService, "android.media.IATVCtrlService");
 +
 +} // namespace
--- 
-1.9.1
-
