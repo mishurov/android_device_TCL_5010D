@@ -1,16 +1,7 @@
 diff --git a/media/libmedia/Android.mk b/media/libmedia/Android.mk
-index efcd541..70a5a24 100644
+index efcd541..dd9a12d 100644
 --- a/media/libmedia/Android.mk
 +++ b/media/libmedia/Android.mk
-@@ -7,7 +7,7 @@ LOCAL_SRC_FILES:= \
- LOCAL_MODULE:= libmedia_helper
- LOCAL_MODULE_TAGS := optional
- 
--LOCAL_C_FLAGS += -Werror -Wno-error=deprecated-declarations -Wall
-+LOCAL_C_FLAGS += -Wno-error=deprecated-declarations -Wall
- LOCAL_CLANG := true
- 
- include $(BUILD_STATIC_LIBRARY)
 @@ -68,8 +68,8 @@ LOCAL_SRC_FILES:= \
      Visualizer.cpp \
      MemoryLeakTrackUtil.cpp \
@@ -34,10 +25,10 @@ index efcd541..70a5a24 100644
  
 diff --git a/media/libmedia/mtkaudio_stubs.cpp b/media/libmedia/mtkaudio_stubs.cpp
 new file mode 100644
-index 0000000..f67277c
+index 0000000..2d9f2cc
 --- /dev/null
 +++ b/media/libmedia/mtkaudio_stubs.cpp
-@@ -0,0 +1,215 @@
+@@ -0,0 +1,219 @@
 +// #include <MtpTypes.h>
 +#include <system/audio.h>
 +#include <StrongPointer.h>
@@ -74,7 +65,7 @@ index 0000000..f67277c
 +  return 0;
 +}
 +
-+int AudioSystem::SetVoiceUnlockSRC(uint outSR, uint outChannel)
++int AudioSystem::SetVoiceUnlockSRC(uint outSR __unused, uint outChannel __unused)
 +{
 +  return 0;
 +}
@@ -89,12 +80,16 @@ index 0000000..f67277c
 +  return 0;
 +}
 +
-+int AudioSystem::ReadRefFromRing(void*buf, uint32_t datasz,void* DLtime)
++int AudioSystem::ReadRefFromRing(
++        void *buf __unused,
++        uint32_t datasz __unused,
++        void* DLtime __unused
++        )
 +{
 +  return 0;
 +}
 +
-+int AudioSystem::GetVoiceUnlockULTime(void* DLtime)
++int AudioSystem::GetVoiceUnlockULTime(void* DLtime __unused)
 +{
 +  return 0;
 +}
@@ -128,15 +123,15 @@ index 0000000..f67277c
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_matv_ps_init(int on)
++    virtual int ATVCS_matv_ps_init(int on __unused)
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_matv_set_parameterb(int in)
++    virtual int ATVCS_matv_set_parameterb(int in __unused)
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_matv_suspend(int on)
++    virtual int ATVCS_matv_suspend(int on __unused)
 +    {
 +        return 0;
 +    }
@@ -144,17 +139,17 @@ index 0000000..f67277c
 +    {
 +        return 0;
 +    }
-+    virtual void ATVCS_matv_chscan(int mode)
++    virtual void ATVCS_matv_chscan(int mode __unused)
 +    {
 +    }
 +    virtual void ATVCS_matv_chscan_stop()
 +    {
 +    }
-+    virtual int ATVCS_matv_get_chtable(int ch, void *entry, int len)
++    virtual int ATVCS_matv_get_chtable(int ch __unused, void *entry __unused, int len __unused)
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_matv_set_chtable(int ch, void *entry, int len)
++    virtual int ATVCS_matv_set_chtable(int ch __unused, void *entry __unused, int len __unused)
 +    {
 +        return 0;
 +    }
@@ -162,13 +157,13 @@ index 0000000..f67277c
 +    {
 +        return 0;
 +    }
-+    virtual void ATVCS_matv_change_channel(int ch)
++    virtual void ATVCS_matv_change_channel(int ch __unused)
 +    {
 +    }
-+    virtual void ATVCS_matv_set_country(int country)
++    virtual void ATVCS_matv_set_country(int country __unused)
 +    {
 +    }
-+    virtual void ATVCS_matv_set_tparam(int mode)
++    virtual void ATVCS_matv_set_tparam(int mode __unused)
 +    {
 +    }
 +    virtual void ATVCS_matv_audio_play()
@@ -181,38 +176,38 @@ index 0000000..f67277c
 +    {
 +        return 0;
 +    }
-+    virtual void ATVCS_matv_audio_set_format(int val)
++    virtual void ATVCS_matv_audio_set_format(int val __unused)
 +    {
 +    }
 +    virtual int ATVCS_matv_audio_get_sound_system()
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_matv_adjust(int item, int val)
++    virtual int ATVCS_matv_adjust(int item __unused, int val __unused)
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_matv_get_chipdep(int item)
++    virtual int ATVCS_matv_get_chipdep(int item __unused)
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_matv_set_chipdep(int item, int val)
++    virtual int ATVCS_matv_set_chipdep(int item __unused, int val __unused)
 +    {
 +        return 0;
 +    }
 +    virtual void ATVCS_matv_register_callback()
 +    {
 +    }
-+    virtual void registerClient(const sp<IATVCtrlClient>& client)
++    virtual void registerClient(const sp<IATVCtrlClient>& client __unused)
 +    {
 +    }
-+    virtual void registerClient_FM(const sp<IATVCtrlClient>& client)
++    virtual void registerClient_FM(const sp<IATVCtrlClient>& client __unused)
 +    {
 +    }
-+    virtual void CLI(char input)
++    virtual void CLI(char input __unused)
 +    {
 +    }
-+    virtual int ATVCS_fm_powerup(void *parm, int len)
++    virtual int ATVCS_fm_powerup(void *parm __unused, int len __unused)
 +    {
 +        return 0;
 +    }
@@ -224,19 +219,19 @@ index 0000000..f67277c
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_fm_tune(void *parm, int len)
++    virtual int ATVCS_fm_tune(void *parm __unused, int len __unused)
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_fm_seek(void *parm, int len)
++    virtual int ATVCS_fm_seek(void *parm __unused, int len __unused)
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_fm_scan(void *parm, int len)
++    virtual int ATVCS_fm_scan(void *parm __unused, int len __unused)
 +    {
 +        return 0;
 +    }
-+    virtual int ATVCS_fm_mute(int val)
++    virtual int ATVCS_fm_mute(int val __unused)
 +    {
 +        return 0;
 +    }
