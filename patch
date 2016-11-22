@@ -1,0 +1,3 @@
+#!/bin/sh
+cd frameworks/av
+git apply -v ../../device/TCL/5010D/patches/framework_av/0001-libmedia-stub-out-MTK-specific-bits-audio-working.patch
