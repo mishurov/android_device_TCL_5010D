@@ -7,7 +7,7 @@ index efcd541..70a5a24 100644
  LOCAL_MODULE_TAGS := optional
  
 -LOCAL_C_FLAGS += -Werror -Wno-error=deprecated-declarations -Wall
-+LOCAL_C_FLAGS += -Werror -Wno-error=deprecated-declarations -Wno-unused-parameter
++LOCAL_C_FLAGS += -Wno-error=deprecated-declarations -Wall
  LOCAL_CLANG := true
  
  include $(BUILD_STATIC_LIBRARY)
