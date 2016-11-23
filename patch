@@ -7,4 +7,5 @@ git apply -v ../../device/TCL/5010D/patches/framework_av/0001-libmedia-stub-out-
 # git checkout .
 # rm media/libmedia/mtkaudio_stubs.cpp
 
-
+# fix kernel compilation bug
+# mkdir -p ~/android/system/out/target/product/5010D/obj/KERNEL_OBJ/usr
