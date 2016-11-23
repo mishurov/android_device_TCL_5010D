@@ -68,7 +68,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/meta_init.modem.rc:root/meta_init.modem.rc \
     $(LOCAL_PATH)/rootdir/meta_init.project.rc:root/meta_init.project.rc \
     $(LOCAL_PATH)/rootdir/meta_init.rc:root/meta_init.rc \
-    $(LOCAL_PATH)/rootdir/recovery.fstab:root/recovery.fstab \
     $(LOCAL_PATH)/rootdir/ueventd.mt6580.rc:root/ueventd.mt6580.rc
 
 # Telecom
