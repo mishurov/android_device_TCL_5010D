@@ -16,6 +16,10 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 # Recovery allowed devices
 TARGET_OTA_ASSERT_DEVICE := 5010D,hct6580_weg_c_m,Pixi4-5
 
+# System ver
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/system.ver:system/system.ver
+
 PRODUCT_PACKAGES += \
    libxlog
 
