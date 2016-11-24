@@ -211,7 +211,6 @@ PRODUCT_PACKAGES += \
     libfmmt6628 \
     libfmmt6630 \
     libmtkplayer
-    libmtkplayer
 
 # Camera
 PRODUCT_PACKAGES += \
