@@ -34,6 +34,9 @@ PRODUCT_PACKAGES += \
     tinymix \
     libtinyalsa
 
+PRODUCT_PACKAGES += \
+    lib_driver_cmd_mt66xx
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_device.xml:system/etc/audio_device.xml \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf
