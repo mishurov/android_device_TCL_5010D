@@ -21,7 +21,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/system.ver:system/system.ver
 
 PRODUCT_PACKAGES += \
-   libxlog
+   libxlog \
+   YGPS
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -178,6 +179,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
+    ro.telephony.ril_class=MediaTekRIL \
     ro.telephony.ril.config=fakeiccid  \
     persist.call_recording.enabled=true \
     persist.call_recording.src=1 \

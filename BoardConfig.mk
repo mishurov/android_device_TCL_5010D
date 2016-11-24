@@ -35,6 +35,10 @@ COMMON_GLOBAL_CPPFLAGS += -DMTK_HARDWARE
 
 BOARD_CONNECTIVITY_VENDOR := MediaTek
 BOARD_USES_MTK_AUDIO := true
+BLOCK_BASED_OTA := false
+
+# RIL
+BOARD_RIL_CLASS := ../../../device/TCL/5010D/ril/
 
 # Kernel
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32S1,32S1 androidboot.selinux=permissive
