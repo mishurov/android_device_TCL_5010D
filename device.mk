@@ -21,11 +21,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/system.ver:system/system.ver
 
 PRODUCT_PACKAGES += \
-   libxlog \
-   YGPS
+   libxlog
 
 # Audio
 PRODUCT_PACKAGES += \
+    audio.primary.mt6580 \
     audio_policy.default \
     audio_policy.stub \
     audio.r_submix.default \
@@ -33,9 +33,10 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     tinymix \
     libtinyalsa
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_device.xml:system/etc/audio_device.xml \
-    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
+    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -166,6 +167,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/agps_profiles_conf.xml:system/etc/agps_profiles_conf.xml \
     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml
 
+PRODUCT_PACKAGES += \
+    YGPS
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0 \
     ro.secure=0 \
@@ -200,6 +204,13 @@ PRODUCT_PACKAGES += \
 # FMRadio
 PRODUCT_PACKAGES += \
     FMRadio \
+    libfmcust \
+    libfmjni \
+    libfmmt6620 \
+    libfmmt6627 \
+    libfmmt6628 \
+    libfmmt6630 \
+    libmtkplayer
     libmtkplayer
 
 # Camera
