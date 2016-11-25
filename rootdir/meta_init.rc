@@ -24,8 +24,6 @@ on early-init
     write /sys/power/clk_buf/clk_buf_ctrl "reg 1 1 1 1"
 
 on init
-    insmod /lib/modules/ubi.ko
-    insmod /lib/modules/ubifs.ko
     sysclktz 0
 
 loglevel 5
