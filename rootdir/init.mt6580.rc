@@ -1,9 +1,16 @@
 # MTK platform .rc configure
 
 import init.project.rc
+import /FWUpgradeInit.rc
 import init.xlog.rc
 import init.aee.rc
+import init.fon.rc
+import init.volte.rc
+import init.mal.rc
+import init.epdg.rc
 import init.nvdata.rc
+import init.trustonic.rc
+import init.common_svc.rc
 
 # init.modem.rc must be the LAST rc file because vold.post_fs_data_done is set in it
 import init.modem.rc
@@ -28,8 +35,7 @@ on init
     mkdir /protect_s 0771 system system
     #create mountpoint for persist partition
     mkdir /persist 0771 system system
-    insmod /lib/modules/ubi.ko
-    insmod /lib/modules/ubifs.ko
+
 
 # Create CIP mount point
     mkdir /custom
@@ -162,12 +168,6 @@ on post-fs-data
     #chown system graphics /dev/mali
 
 
-    #liuyang add begin
-    chown root   radio  /sys/class/leds/red/brightness
-    chown root   radio  /sys/class/leds/green/brightness
-    chown root   radio  /sys/class/leds/blue/brightness
-    chown root   radio  /sys/class/leds/breathing-light/brightness
-    #liuyang add end
 
     # Touch Panel
     # chmod 0664 /dev/touch
@@ -412,9 +412,6 @@ on post-fs-data
 
     #Accdet
     chown root radio /sys/devices/platform/Accdet_Driver/driver/accdet_call_state
-#add for memsic acc
-    chown root /system/bin/memsicp
-    chmod 0755 /system/bin/memsicp
 
     #VideoCodec
     #insmod /system/lib/modules/vcodec_kernel_driver.ko
@@ -756,16 +753,6 @@ on boot
     chown system system /sys/class/leds/green/trigger
     chown system system /sys/class/leds/blue/trigger
 
-#<<hct
-    chmod 0777 /sys/bus/platform/drivers/kd_camera_flashlight/flashContrl
-    chown system radio  /sys/bus/platform/drivers/kd_camera_flashlight/flashContrl
-    #liuyang add begin
-    chmod 0777 /sys/class/leds/red/brightness
-    chmod 0777 /sys/class/leds/green/brightness
-    chmod 0777 /sys/class/leds/blue/brightness
-    chmod 0777 /sys/class/leds/breathing-light/brightness
-    #liuyang add end
-
     # Permission for hibernation
     chown radio system /sys/power/tuxonice
     chown radio system /sys/power/tuxonice/do_hibernate
@@ -818,23 +805,6 @@ on boot
     chown shell system /proc/driver/wmt_dbg
     chown shell system /proc/driver/wmt_aee
 
-# tpgesture
-    chmod 666 /sys/devices/soc/soc:touch/tpgesture_status
-    chown root system /sys/devices/soc/soc:touch/tpgesture_status
-    chmod 666 /sys/devices/bus/bus:touch@/tpgesture_status
-    chown root system /sys/devices/bus/bus:touch@/tpgesture_status
-# tpgesture
-#liuyang add begin
-    chmod 0777 /sys/class/leds/red/brightness
-    chmod 0777 /sys/class/leds/green/brightness
-    chmod 0777 /sys/class/leds/blue/brightness
-    chown root radio  /sys/class/leds/red/brightness
-    chown root radio  /sys/class/leds/green/brightness
-    chown root radio  /sys/class/leds/blue/brightness
-
-    chmod 0777 /sys/class/leds/breathing-light/brightness
-    chown root radio  /sys/class/leds/breathing-light/brightness
-#liuyang add end
 #Define device for ATCID
     chmod 0660 /dev/ttyGS0
     chown system /dev/ttyGS0
@@ -855,14 +825,12 @@ on property:vold.decrypt=trigger_reset_main
 on property:vold.decrypt=trigger_restart_min_framework
     start start_modem
     start msensord
-    start memsicp
     start permission_check
 
 on property:vold.decrypt=trigger_restart_framework
     start nvram_daemon
     start start_modem
     start msensord
-    start memsicp
     start permission_check
 
 on property:vold.decrypt=trigger_shutdown_framework
@@ -982,12 +950,12 @@ on property:persist.service.atci.autostart=1
 start atci_service
 start atcid-daemon-u
 
-#service audio-daemon /system/bin/audiocmdservice_atci
-#    class main
-#    socket atci-audio stream 660 root system
-#    user root
-#    disabled
-#    oneshot
+service audio-daemon /system/bin/audiocmdservice_atci
+    class main
+    socket atci-audio stream 660 root system
+    user root
+    disabled
+    oneshot
 
 service md_minilog_util /system/bin/md_minilog_util
     user root
@@ -1162,14 +1130,14 @@ service PPLAgent /system/bin/ppl_agent
     user system
     group system cache
 
-#service vtservice /system/bin/vtservice
-#    class main
-#    socket soc_vt_tcv dgram 660 radio system
-#    socket soc_vt_stk dgram 660 radio system
-#    socket soc_vt_svc dgram 660 radio system
-#    user root
-#    group camera graphics media sdcard_rw radio sdcard_r media_rw
-#    ioprio rt 4
+service vtservice /system/bin/vtservice
+    class main
+    socket soc_vt_tcv dgram 660 radio system
+    socket soc_vt_stk dgram 660 radio system
+    socket soc_vt_svc dgram 660 radio system
+    user root
+    group camera graphics media sdcard_rw radio sdcard_r media_rw
+    ioprio rt 4
 
 service cmmb /system/bin/cmmbsp
     class main
@@ -1351,12 +1319,6 @@ service akmd8963 /system/bin/akmd8963
     group system
     class main
 
-service memsicp /system/bin/memsicp
-    oneshot
-    user system
-    group system
-    class main
-
 service akmd09911 /system/bin/akmd09911
     disabled
     user system
@@ -1451,13 +1413,6 @@ service NvRAMAgent /system/bin/nvram_agent_binder
     user system
     group system
 
-#<<hct:liuyang
-service NvRAMBackupAgent /system/bin/nvram_backup_binder
-    class main
-    user system
-    group system bluetooth net_bt_stack
-#hct:liuyang
-
 service thermal_manager /system/bin/thermal_manager
     class main
     user root
@@ -1478,11 +1433,11 @@ service fuelgauged /system/bin/fuelgauged
     user system
     group system
 
-#service sn /system/bin/sn
-#    class late_start
-#    user system
-#    group system sdcard_rw
-#    oneshot
+service sn /system/bin/sn
+    class late_start
+    user system
+    group system sdcard_rw
+    oneshot
 
 #add for power-off alarm
 service poad /system/bin/poad
@@ -1545,3 +1500,10 @@ service ipo_swap /system/bin/ipo_swap
     group root
     oneshot
 
+#Add by jinlong.sang for SSV FR793904
+service updatelogo /system/bin/updatelogo
+    class main
+    user root
+    group root
+    oneshot
+    disabled
