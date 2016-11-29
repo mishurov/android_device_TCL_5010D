@@ -21,7 +21,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/system.ver:system/system.ver
 
 PRODUCT_PACKAGES += \
-   libmtk_symbols \
    libstlport
 
 PRODUCT_PACKAGES += \

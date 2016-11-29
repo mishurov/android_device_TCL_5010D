@@ -6,7 +6,22 @@ on init
     mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
     mkdir /storage/usbotg 0700 root root
 
+#lixiang.he add for  mobile_info
+on post-fs
+    chown system system /mobile_info
+    chmod 0777 /mobile_info
+
 on post-fs-data
+#begin--add by guangxi.deng for TASK:742620 about root check,20151021
+    mkdir /data/rootflag 0770 root system
+#end--add by guangxi.deng for TASK:742620 about root check,20151021
+#Begin add for T743275:implement MMI string "*#3228#" by heyan 20151123
+    mkdir /data/imgver 0775 root system
+    mkdir /data/enable_adb 0775 root system
+#End add for T743275:implement MMI string "*#3228#" by heyan 20151123
+#begin lixiang.he add for mobile_info about T1175903
+    mkdir /mobile_info/minilog 0775 root system
+#end lixiang.he add for mobile_info about T1175903
 
 #
 # Connectivity related device nodes & configuration (begin)
@@ -64,6 +79,18 @@ on post-fs-data
 	chmod 0660 /dev/BU64745GWZAF
     chown system camera /dev/BU64745GWZAF
 
+#FC8180
+    #begin-20160107-yuduan.xie-add-for-DTV
+    chmod 0660 /dev/isdbt
+    chown system media /dev/isdbt
+    #end-20160107-yuduan.xie-add-for-DTV
+
+#AW8155
+    #begin-20160202-duanjinhui-add-for-ExternalPA
+    #chmod 0660 /dev/aw8155
+    #chown media media /dev/aw8155
+    #end-20160202-duanjinhui-add-for-ExternalPA
+
 #SMB
     chown system system /proc/smb/ScreenComm
     chmod 0660 /proc/smb/ScreenComm
@@ -108,6 +135,13 @@ on post-fs-data
 
 #    chmod 0660 /dev/spm
 #    chown system system /dev/spm
+
+#Begin add for T1453028:implement MMI string "*#3228#" by heyan 20160119
+    start getver
+#End add for T1453028:implement MMI string "*#3228#" by heyan 201601199
+##add begin 20151119 by xiaorong.ling for task926558
+    start gettracability
+##add end 20151119 by xiaorong.ling for task926558
 
 service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg
     class late_start
@@ -168,3 +202,52 @@ service spm_script /system/bin/spm_loader
     class core
     oneshot
 
+#begin--add by guangxi.deng for TASK:742620 about root check,20151021
+service forcc /system/bin/forcc
+    class main
+    user root
+    group root
+    oneshot
+#end--add by guangxi.deng for TASK:742620 about root check,20151021
+
+#
+# vtservice
+#
+service vtservice /system/bin/vtservice
+        class main
+        socket soc_vt_tcv dgram 660 radio system
+        socket soc_vt_stk dgram 660 radio system
+        socket soc_vt_svc dgram 660 radio system
+        user system
+        group system camera graphics inet net_admin net_raw media sdcard_rw radio sdcard_r media_rw
+        ioprio rt 4
+
+#Begin add for T1453028:implement MMI string "*#3228#" by heyan 20160119
+service getver  /system/bin/getver
+#       class main
+       user root
+       group root
+       oneshot
+#End add for T1453028:implement MMI string "*#3228#" by heyan 20160119
+##add begin 20151119 by xiaorong.ling for task926558
+# set CU, PTS, PTH, BSN, WIFI, BT relevant parameters
+service gettracability  system/bin/gettracability
+#    class main
+    user root
+    group root
+    oneshot
+##add end 20151119 by xiaorong.ling for task926558
+
+#added by lixiang.he for task 1175903 begin
+on early-boot
+    start powerup_reason
+
+on boot
+    chmod 0775 /mobile_info/minilog/powerup_reason
+
+service powerup_reason /system/bin/powerup_reason
+    user root
+    group root
+    disabled
+    oneshot
+#added by lixiang.he for task 1175903 end

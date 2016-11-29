@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project name="mishurov/android_device_TCL_5010D" path="device/TCL/5010D" remote="github" revision="cm-13.0" />
+  <project name="mishurov/android_vendor_TCL_5010D" path="vendor/TCL/5010D" remote="github" revision="cm-13.0" />
+</manifest>
