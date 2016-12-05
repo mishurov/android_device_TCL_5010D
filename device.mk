@@ -161,14 +161,14 @@ PRODUCT_PACKAGES += \
     Torch
 
 # RIL	
-PRODUCT_PACKAGES += \
-    epdg_wod \
-    gsm0710muxd \
-    gsm0710muxdmd2 \
-    mtkrild \
-    mtkrildmd2 \
-    mtk-ril \
-    mtk-rilmd2
+#PRODUCT_PACKAGES += \
+#    epdg_wod \
+#    gsm0710muxd \
+#    gsm0710muxdmd2 \
+#    mtkrild \
+#    mtkrildmd2 \
+#    mtk-ril \
+#    mtk-rilmd2
 
 # Stk
 PRODUCT_PACKAGES += \
