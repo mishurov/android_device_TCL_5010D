@@ -160,15 +160,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Torch
 
-# RIL	
-#PRODUCT_PACKAGES += \
-#    epdg_wod \
-#    gsm0710muxd \
-#    gsm0710muxdmd2 \
-#    mtkrild \
-#    mtkrildmd2 \
-#    mtk-ril \
-#    mtk-rilmd2
 
 # Stk
 PRODUCT_PACKAGES += \
@@ -196,7 +187,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
-    ro.telephony.ril_class=MediaTekRIL \
+    ro.telephony.ril_class=MT6580 \
     ro.telephony.ril.config=fakeiccid  \
     persist.call_recording.enabled=true \
     persist.call_recording.src=1 \
