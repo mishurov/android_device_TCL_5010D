@@ -33,14 +33,9 @@ BOARD_USES_LEGACY_MTK_AV_BLOB := true
 COMMON_GLOBAL_CFLAGS += -DMTK_HARDWARE -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL -DDISABLE_ASHMEM_TRACKING
 COMMON_GLOBAL_CPPFLAGS += -DMTK_HARDWARE
 
-# RIL
-BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
-
-BOARD_CONNECTIVITY_VENDOR := MediaTek
-BOARD_CONNECTIVITY_MODULE := conn_soc
 BOARD_CONNECTIVITY_VENDOR := MediaTek
 BOARD_USES_MTK_AUDIO := true
-BLOCK_BASED_OTA := false
+BOARD_USES_MTK_HARDWARE :=true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := bootopt=64S3,32S1,32S1 androidboot.selinux=permissive
@@ -48,8 +43,8 @@ BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --base 0x80000000 --pagesize 2048 --kernel_offset 0x00008000 --ramdisk_offset 0x04000000 --second_offset 0x00f00000 --tags_offset 0x0e000000
 TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/kernel
-
 TARGET_KMODULES := true
+
 # Disable memcpy opt (for audio libraries)
 TARGET_CPU_MEMCPY_OPT_DISABLE := true
 
@@ -139,4 +134,8 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_SEPOLICY_DIRS := \
        device/TCL/5010D/sepolicy
 
+# Hack for building without kernel sources
+$(shell mkdir -p $(OUT)/obj/KERNEL_OBJ/usr)
 
+# RIL
+BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril

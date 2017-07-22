@@ -12,19 +12,6 @@ on post-fs-data
     # Modem related device nodes
     mkdir /data/nvram/md  0770 root system
 
-    # begin add by zhangjianping add for sim_lock hzy_secro modify the path 20150511
-        #begin change by lixiang.he for task 980437 on 20151125
-	#symlink /custpack/raw /data/nvram/md/CONFIG
-        symlink /system/custpack/raw /data/nvram/md/CONFIG
-        #end change by lixiang.he for task 980437 on 20151125
-	mkdir /data/nvram/md/s 0600 system system
-        #begin change by lixiang.he for task 980437 on 20151125
-	mount  ext4 /dev/block/platform/mtk-msdc.0/11120000.msdc0/by-name/secro /data/nvram/md/s wait noauto_da_alloc
-	mount  ext4 /dev/block/platform/mtk-msdc.0/11120000.msdc0/by-name/secro /data/nvram/md/s ro remount wait
-        #end change by lixiang.he for task 980437 on 20151125
-    # end add by zhangjianping add for sim_lock hzy_secro modify the path 20150511
-
-
     chown radio radio /sys/kernel/ccci/boot
 
 #SeLinux

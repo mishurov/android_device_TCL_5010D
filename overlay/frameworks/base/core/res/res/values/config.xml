@@ -75,8 +75,6 @@
         <item>1,1</item>
         <item>0,1</item>
         <item>7,1</item>
-        <item>40,1</item>
-        <item>41,1</item>
     </string-array>
 
     <string-array name="config_tether_usb_regexs">
@@ -351,4 +349,10 @@
     <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">-1</integer>
 
     <bool name="config_user_notification_of_restrictied_mobile_access">false</bool>
+	
+	<!-- The RadioAccessFamilies supported by the device.
+	 Empty is viewed as "all".  Only used on devices which
+	 don't support RIL_REQUEST_GET_RADIO_CAPABILITY
+	 format is UMTS|LTE|... -->
+	<string translatable="false" name="config_radio_access_family">GSM|WCDMA</string>
 </resources>

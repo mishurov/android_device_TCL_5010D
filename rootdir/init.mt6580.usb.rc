@@ -1,14 +1,11 @@
-#modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
 on boot
-    setprop sys.usb.vid 1BBB   #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    setprop sys.usb.vid 0E8D
     write /sys/class/android_usb/android0/iManufacturer MediaTek
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
     write /sys/class/android_usb/android0/f_rndis/wceis 1
     write /sys/class/android_usb/android0/f_rndis/manufacturer MediaTek    
     write /sys/class/android_usb/android0/f_rndis/vendorID ${sys.usb.vid}
-    write /sys/class/android_usb/android0/iProduct $sys.usb.product #add by guangxi.deng for usb product,Task:744181,2015.10.21
-    write /sys/class/android_usb/android0/iManufacturer $usb.manufacturer #add by guangxi.deng for usb manufacturer,Task:744181,2015.10.21
 
 on fs
     mkdir /dev/usb-ffs 0770 shell shell
@@ -75,7 +72,7 @@ on property:sys.usb.config=adb,acm
 on property:sys.usb.config=mass_storage
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0166  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    write /sys/class/android_usb/android0/idProduct 2002
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state ${sys.usb.config}
@@ -84,7 +81,7 @@ on property:sys.usb.config=mass_storage
 on property:sys.usb.config=mass_storage,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0165  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    write /sys/class/android_usb/android0/idProduct 2003
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
     start adbd
@@ -94,7 +91,7 @@ on property:sys.usb.config=mass_storage,adb
 on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0168  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    write /sys/class/android_usb/android0/idProduct 2008
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state ${sys.usb.config}
@@ -113,7 +110,7 @@ on property:sys.usb.config=mtp,acm
 on property:sys.usb.config=mtp,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0167  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phonesD
+    write /sys/class/android_usb/android0/idProduct 201D
     write /sys/class/android_usb/android0/functions mtp,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
@@ -153,7 +150,7 @@ on property:sys.usb.config=mtp,mass_storage,adb
 on property:sys.usb.config=ptp
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0170  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    write /sys/class/android_usb/android0/idProduct 200B
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state ${sys.usb.config}
@@ -172,7 +169,7 @@ on property:sys.usb.config=ptp,acm
 on property:sys.usb.config=ptp,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0169  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    write /sys/class/android_usb/android0/idProduct 200C
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
     start adbd
@@ -212,7 +209,7 @@ on property:sys.usb.config=ptp,mass_storage,adb
 on property:sys.usb.config=rndis
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0174  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    write /sys/class/android_usb/android0/idProduct 2004
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/bDeviceClass 224
     write /sys/class/android_usb/android0/enable 1
@@ -232,7 +229,7 @@ on property:sys.usb.config=rndis,acm
 on property:sys.usb.config=rndis,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0173  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    write /sys/class/android_usb/android0/idProduct 2005
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
     start adbd
@@ -373,6 +370,13 @@ on property:sys.usb.config=accessory,audio_source,adb
 
 #34.USB Charging Only configuration
 on property:sys.usb.config=charging
+#wqtao.add.start.
+    write /sys/class/android_usb/android0/enable 0
+	write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
+	write /sys/class/android_usb/android0/idProduct 2008
+	write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    write /sys/class/android_usb/android0/enable 1
+#wqtao.add.end.
     setprop sys.usb.state ${sys.usb.config}
     setprop sys.usb.charging yes
 
@@ -386,7 +390,7 @@ on property:sys.usb.charging=no
 on property:sys.usb.config=bicr
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0172  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    write /sys/class/android_usb/android0/idProduct 2002
     write /sys/class/android_usb/android0/functions mass_storage
     write /sys/class/android_usb/android0/f_mass_storage/bicr 1
     write /sys/class/android_usb/android0/f_mass_storage/lun/file "/dev/block/loop0"
@@ -397,7 +401,7 @@ on property:sys.usb.config=bicr
 on property:sys.usb.config=bicr,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-    write /sys/class/android_usb/android0/idProduct 0171  #modify 20151028 by jinlong.sang for 732534 732582 unify the VID/PID for TCL smart phones
+    write /sys/class/android_usb/android0/idProduct 2003
     write /sys/class/android_usb/android0/functions mass_storage,adb
     write /sys/class/android_usb/android0/f_mass_storage/bicr 1
     write /sys/class/android_usb/android0/f_mass_storage/lun/file "/dev/block/loop0"
@@ -527,46 +531,6 @@ on property:mediatek.usb.port.mode=usb
 on property:mediatek.usb.port.mode=uart
       write /sys/devices/platform/mt_usb/portmode 1
 
-
-#begin--dengguangxi add MTK patch for Defect:1035113,20151222
-# USB midi configuration
-on property:sys.usb.config=midi
-write /sys/class/android_usb/android0/enable 0
-write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-write /sys/class/android_usb/android0/idProduct 2046
-write /sys/class/android_usb/android0/functions ${sys.usb.config}
-write /sys/class/android_usb/android0/enable 1
-setprop sys.usb.state ${sys.usb.config}
-# USB midi configuration, with acm
-on property:sys.usb.config=midi,acm
-write /sys/class/android_usb/android0/enable 0
-write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-write /sys/class/android_usb/android0/idProduct 2047
-write /sys/class/android_usb/android0/f_acm/instances 1
-write /sys/class/android_usb/android0/functions ${sys.usb.config}
-write /sys/class/android_usb/android0/enable 1
-setprop sys.usb.state ${sys.usb.config}
-# USB midi configuration, with adb
-on property:sys.usb.config=midi,adb
-write /sys/class/android_usb/android0/enable 0
-write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-write /sys/class/android_usb/android0/idProduct 2048
-write /sys/class/android_usb/android0/functions ${sys.usb.config}
-write /sys/class/android_usb/android0/enable 1
-start adbd
-setprop sys.usb.state ${sys.usb.config}
-# USB midi configuration, with adb acm
-on property:sys.usb.config=midi,adb,acm
-write /sys/class/android_usb/android0/enable 0
-write /sys/class/android_usb/android0/idVendor ${sys.usb.vid}
-write /sys/class/android_usb/android0/idProduct 2049
-write /sys/class/android_usb/android0/f_acm/instances 1
-write /sys/class/android_usb/android0/functions ${sys.usb.config}
-write /sys/class/android_usb/android0/enable 1
-start adbd
-setprop sys.usb.state ${sys.usb.config}
-#end--dengguangxi add MTK patch for Defect:1035113,20151222
-
 # USB midi configuration
 on property:sys.usb.config=midi
 	write /sys/class/android_usb/android0/enable 0
@@ -608,4 +572,3 @@ on property:sys.usb.config=midi,adb,acm
 	write /sys/class/android_usb/android0/enable 1
 	start adbd
 	setprop sys.usb.state ${sys.usb.config}
-

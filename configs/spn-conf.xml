@@ -302,14 +302,14 @@
 <spnOverride numeric="31260" spn="CoverageCo"/>
 <spnOverride numeric="330120" spn="Open Mob PRI"/>
 <spnOverride numeric="330110" spn="PR Claro"/>
-<spnOverride numeric="33450" spn="Iusacell 4G"/>
-<spnOverride numeric="33450" spn="Iusacell GSM"/>
+<spnOverride numeric="33450" spn="AT&amp;T"/>
+<spnOverride numeric="33450" spn="AT&amp;T"/>
 <spnOverride numeric="33490" spn="Nextel 3G"/>
 <spnOverride numeric="33403" spn="movistar"/>
 <spnOverride numeric="334030" spn="movistar"/>
 <spnOverride numeric="334020" spn="TELCEL"/>
-<spnOverride numeric="334050" spn="Iusacell"/>
-<spnOverride numeric="334090" spn="Nextel"/>
+<spnOverride numeric="334050" spn="AT&amp;T"/>
+<spnOverride numeric="334090" spn="AT&amp;T"/>
 <spnOverride numeric="33420" spn="TELCEL"/>
 <spnOverride numeric="338180" spn="LIME"/>
 <spnOverride numeric="33850" spn="DIGICEL"/>

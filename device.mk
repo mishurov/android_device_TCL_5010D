@@ -14,14 +14,7 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Recovery allowed devices
-TARGET_OTA_ASSERT_DEVICE := 5010D,hct6580_weg_c_m,Pixi4-5
-
-# System ver
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/system.ver:system/system.ver
-
-PRODUCT_PACKAGES += \
-   libstlport
+TARGET_OTA_ASSERT_DEVICE := 5010D,Pixi4-5
 
 PRODUCT_PACKAGES += \
    libxlog
@@ -35,10 +28,6 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     tinymix \
     libtinyalsa
-
-PRODUCT_PACKAGES += \
-    lib_driver_cmd_mt66xx
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_device.xml:system/etc/audio_device.xml \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
@@ -49,13 +38,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libbt-vendor
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/bt_did.conf:system/etc/bluetooth/bt_did.conf
+    $(LOCAL_PATH)/configs/bluetooth/auto_pair_devlist.conf:system/etc/bluetooth/auto_pair_devlist.conf \
+	$(LOCAL_PATH)/configs/bluetooth/bt_did.conf:system/etc/bluetooth/bt_did.conf \
+	$(LOCAL_PATH)/configs/bluetooth/bt_stack.conf:system/etc/bluetooth/bt_stack.conf \
+	$(LOCAL_PATH)/configs/bluetooth/bt_stack.conf.debug:system/etc/bluetooth/bt_stack.conf.debug \
+	$(LOCAL_PATH)/configs/bluetooth/bt_stack.conf.sqc:system/etc/bluetooth/bt_stack.conf.sqc
 
 # Keyboard layout
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/configs/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl \
      $(LOCAL_PATH)/configs/ACCDET.kl:system/usr/keylayout/ACCDET.kl \
      $(LOCAL_PATH)/configs/AVRCP.kl:system/usr/keylayout/AVRCP.kl
+
+PRODUCT_PACKAGES += libmt6580
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril_class=MT6580
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
@@ -64,18 +62,17 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/factory_init.rc:root/factory_init.rc \
     $(LOCAL_PATH)/rootdir/fstab.mt6580:root/fstab.mt6580 \
     $(LOCAL_PATH)/rootdir/init.aee.rc:root/init.aee.rc \
-    $(LOCAL_PATH)/rootdir/init.common_svc.rc:root/init.common_svc.rc \
     $(LOCAL_PATH)/rootdir/init.modem.rc:root/init.modem.rc \
     $(LOCAL_PATH)/rootdir/init.mt6580.rc:root/init.mt6580.rc \
     $(LOCAL_PATH)/rootdir/init.mt6580.usb.rc:root/init.mt6580.usb.rc \
-    $(LOCAL_PATH)/rootdir/init.nvdata.rc:root/init.nvdata.rc \
     $(LOCAL_PATH)/rootdir/init.project.rc:root/init.project.rc \
     $(LOCAL_PATH)/rootdir/init.rc:root/init.rc \
     $(LOCAL_PATH)/rootdir/init.xlog.rc:root/init.xlog.rc \
     $(LOCAL_PATH)/rootdir/meta_init.modem.rc:root/meta_init.modem.rc \
     $(LOCAL_PATH)/rootdir/meta_init.project.rc:root/meta_init.project.rc \
     $(LOCAL_PATH)/rootdir/meta_init.rc:root/meta_init.rc \
-    $(LOCAL_PATH)/rootdir/recovery.fstab:root/recovery.fstab \
+    $(LOCAL_PATH)/rootdir/init.performance.rc:root/init.performance.rc \
+    $(LOCAL_PATH)/rootdir/init.nvdata.rc:root/init.nvdata.rc \
     $(LOCAL_PATH)/rootdir/ueventd.mt6580.rc:root/ueventd.mt6580.rc
 
 # Telecom
@@ -96,7 +93,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
     $(LOCAL_PATH)/configs/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
@@ -133,9 +129,10 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-	$(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
+	$(LOCAL_PATH)/configs/media_codecs_mediatek_video.xml:system/etc/media_codecs_mediatek_video.xml \
 	$(LOCAL_PATH)/configs/media_codecs_mediatek_audio.xml:system/etc/media_codecs_mediatek_audio.xml \
-	$(LOCAL_PATH)/configs/media_codecs_mediatek_video.xml:system/etc/media_codecs_mediatek_video.xml
+	$(LOCAL_PATH)/configs/media_codecs_mediatek_performance.xml:system/etc/media_codecs_mediatek_performance.xml \
+	$(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -145,34 +142,28 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+    lib_driver_cmd_mt66xx \
+    libwifi-hal-mt66xx \
+    wifi_hal \
     libwpa_client \
     hostapd \
+    hostapd_cli \
     dhcpcd.conf \
     wpa_supplicant \
     wpa_supplicant.conf
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
-    $(LOCAL_PATH)/configs/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
-    $(LOCAL_PATH)/configs/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
 
 # Torch
 PRODUCT_PACKAGES += \
     Torch
 
-
-# Stk
+# STk
 PRODUCT_PACKAGES += \
     Stk
 
 # GPS
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/agps_profiles_conf.xml:system/etc/agps_profiles_conf.xml \
+    $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf.xml \
     $(LOCAL_PATH)/configs/agps_profiles_conf2.xml:system/etc/agps_profiles_conf2.xml
-
-PRODUCT_PACKAGES += \
-    YGPS \
-    libmt6580
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0 \
@@ -187,8 +178,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
-    ro.telephony.ril_class=MT6580 \
-    ro.telephony.ril.config=fakeiccid  \
+    ro.telephony.ril.config=signalstrength  \
     persist.call_recording.enabled=true \
     persist.call_recording.src=1 \
     persist.debug.wfd.enable=1
@@ -205,16 +195,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Gello
 
-# FMRadio
+# FM Radio
 PRODUCT_PACKAGES += \
-    FMRadio \
-    libfmcust \
-    libfmjni \
-    libfmmt6620 \
-    libfmmt6627 \
-    libfmmt6628 \
-    libfmmt6630 \
-    libmtkplayer
+   FMRadio \
+   libfmjni
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -245,3 +229,4 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=8
 
 # Dalvik
 $(call inherit-product-if-exists, frameworks/native/build/phone-hdpi-2048-dalvik-heap.mk)
+
