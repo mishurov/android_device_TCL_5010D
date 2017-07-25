@@ -1,14 +1,3 @@
-From 764428dddb4d4f8a0b348b7303db65bee972b630 Mon Sep 17 00:00:00 2001
-From: DeckerSU <support@decker.su>
-Date: Tue, 3 Jan 2017 20:08:37 +0300
-Subject: [PATCH 2/2] libnetutils add MTK bits
-
-Change-Id: If2f327c37ec600d93b82293830bff2b09cb4a7ac
----
- include/netutils/ifc.h  |  6 +++++
- libnetutils/ifc_utils.c | 61 +++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 67 insertions(+)
-
 diff --git a/include/netutils/ifc.h b/include/netutils/ifc.h
 index 3b27234..54f5e0a 100644
 --- a/include/netutils/ifc.h
@@ -26,11 +15,24 @@ index 3b27234..54f5e0a 100644
  __END_DECLS
  
  #endif /* _NETUTILS_IFC_H_ */
+diff --git a/init/init.cpp b/init/init.cpp
+index 8ea42ca..e1d0063 100644
+--- a/init/init.cpp
++++ b/init/init.cpp
+@@ -85,7 +85,7 @@ static int have_console;
+ static char console_name[PROP_VALUE_MAX] = "/dev/console";
+ static time_t process_needs_restart;
+ 
+-static const char *ENV[32];
++static const char *ENV[64];
+ 
+ bool waiting_for_exec = false;
+ 
 diff --git a/libnetutils/ifc_utils.c b/libnetutils/ifc_utils.c
-index 7739cf4..21fd662 100644
+index 0bd7628..1f8b7f8 100644
 --- a/libnetutils/ifc_utils.c
 +++ b/libnetutils/ifc_utils.c
-@@ -737,3 +737,64 @@ ifc_configure(const char *ifname,
+@@ -710,3 +710,64 @@ ifc_configure(const char *ifname,
  
      return 0;
  }
@@ -95,6 +97,3 @@ index 7739cf4..21fd662 100644
 +}
 +
 +#endif /* MTK_HARDWARE */
--- 
-2.7.4
-

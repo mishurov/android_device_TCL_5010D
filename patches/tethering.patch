@@ -1,16 +1,7 @@
-From ed60871911327ecda20d9ffbfa9f53d9c0b01c6c Mon Sep 17 00:00:00 2001
-From: alexey9224 <aleha.druga@gmail.com>
-Date: Wed, 15 Feb 2017 15:39:55 +0500
-Subject: [PATCH] patch
-
----
- netd/server/SoftapController.cpp | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/netd/server/SoftapController.cpp b/netd/server/SoftapController.cpp
-index b05118e..253e06b 100644
---- a/netd/server/SoftapController.cpp
-+++ b/netd/server/SoftapController.cpp
+diff --git a/server/SoftapController.cpp b/server/SoftapController.cpp
+index b05118e..253e06b 100755
+--- a/server/SoftapController.cpp
++++ b/server/SoftapController.cpp
 @@ -54,7 +54,7 @@ using android::base::WriteStringToFile;
  #endif
  
@@ -29,6 +20,3 @@ index b05118e..253e06b 100644
  
      std::string fbuf;
      if (argc > 7) {
--- 
-2.7.4
-

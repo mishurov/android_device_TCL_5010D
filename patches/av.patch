@@ -1,16 +1,3 @@
-From bbab3c0ace9eb0e20ac5c75648eb7056b13ff6fc Mon Sep 17 00:00:00 2001
-From: zormax <zormax@gmail.com>
-Date: Thu, 29 Sep 2016 17:58:52 +0300
-Subject: [PATCH] mtk-av
-
-Change-Id: I74dccd06e8eaa759667b686b6c11aec8ae936f2c
----
- media/libmedia/Android.mk         |   8 ++
- media/libmedia/mtkaudio_stubs.cpp | 219 ++++++++++++++++++++++++++++++++++++++
- media/libstagefright/Android.mk   |   3 +
- 3 files changed, 230 insertions(+)
- create mode 100644 media/libmedia/mtkaudio_stubs.cpp
-
 diff --git a/media/libmedia/Android.mk b/media/libmedia/Android.mk
 index efcd541..e51858e 100644
 --- a/media/libmedia/Android.mk
@@ -255,7 +242,7 @@ index 0000000..2d9f2cc
 +
 +} // namespace
 diff --git a/media/libstagefright/Android.mk b/media/libstagefright/Android.mk
-index 29fb418..3c9f7d1 100644
+index 792c139..51c33a6 100644
 --- a/media/libstagefright/Android.mk
 +++ b/media/libstagefright/Android.mk
 @@ -1,6 +1,9 @@
@@ -268,6 +255,3 @@ index 29fb418..3c9f7d1 100644
  
  LOCAL_SRC_FILES:=                         \
          ACodec.cpp                        \
--- 
-1.9.1
-
