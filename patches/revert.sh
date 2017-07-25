@@ -17,4 +17,3 @@ echo Revert net
 cd ../../../../system/netd
 rm tethering.patch
 git checkout .
-cd -
