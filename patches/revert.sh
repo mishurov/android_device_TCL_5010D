@@ -15,8 +15,8 @@ rm libnetutils/ifc_utils.c.orig
 git checkout .
 cd -
 
-echo Revert bt
+echo Revert net
 cd ../../../../system
-rm bt.patch 
+rm tethering.patch
 cd netd
 git checkout .
