@@ -12,7 +12,7 @@ import /init.${ro.zygote}.rc
 import /init.trace.rc
 # Include CM's extra init file
 import /init.cm.rc
-import /init.performance.rc
+#import /init.performance.rc
 import /init.modem.rc
 
 on early-init
@@ -112,7 +112,7 @@ on init
     write /proc/sys/vm/mmap_min_addr 32768
     write /proc/sys/net/ipv4/ping_group_range "0 2147483647"
     write /proc/sys/net/unix/max_dgram_qlen 300
-    write /proc/sys/kernel/sched_rt_runtime_us 950000
+    write /proc/sys/kernel/sched_rt_runtime_us 800000
     write /proc/sys/kernel/sched_rt_period_us 1000000
 
     # reflect fwmark from incoming packets onto generated replies
@@ -677,6 +677,14 @@ service netd /system/bin/netd
     socket dnsproxyd stream 0660 root inet
     socket mdns stream 0660 root system
     socket fwmarkd stream 0660 root inet
+
+service ril-daemon /system/bin/rild
+    class main
+    socket rild stream 660 root radio
+    socket sap_uim_socket1 stream 660 bluetooth bluetooth
+    socket rild-debug stream 660 radio system
+    user root
+    group radio cache inet misc audio log
 
 service debuggerd /system/bin/debuggerd
     class main

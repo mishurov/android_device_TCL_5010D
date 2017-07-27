@@ -10,42 +10,49 @@ on post-fs-data
 
     # Modem related device nodes
     mkdir /data/nvram/md  0770 root system
-    chown radio radio /sys/kernel/ccci/boot
-    chown radio radio /dev/ccci_fs
-    chown radio radio /dev/ccci_ioctl0
-    chown radio radio /dev/ccci_ioctl1
-    chown radio radio /dev/ccci_ipc_1220_0
-    chown radio radio /dev/ccci_md_log_rx
-    chown radio radio /dev/ccci_md_log_tx
-    chown radio radio /dev/ccci_monitor
-    chown radio radio /dev/ccci_pcm_rx
-    chown radio radio /dev/ccci_pcm_tx
-    chown radio radio /dev/ccci_uem_rx
-    chown radio radio /dev/ccci_uem_tx
 
-    # Selinux
+    # haibo.zhong.hz 2015-10-30, add for nvram_customization for T732585
+    symlink /system/etc/raw /data/nvram/md/CONFIG
+
+    # begin add by zhangjianping add for sim_lock hzy_secro modify the path 20150511
+    mkdir /data/nvram/md/s 0600 system system
+    #begin change by lixiang.he for task 980437 on 20151125
+    mount  ext4 /dev/block/platform/mtk-msdc.0/11120000.msdc0/by-name/secro /data/nvram/md/s wait noauto_da_alloc
+    mount  ext4 /dev/block/platform/mtk-msdc.0/11120000.msdc0/by-name/secro /data/nvram/md/s ro remount wait
+    #end change by lixiang.he for task 980437 on 20151125
+    # end add by zhangjianping add for sim_lock hzy_secro modify the path 20150511   
+
+
+#  Build-in Modified - S
+#    insmod /system/lib/modules/ccci_plat.ko
+#    insmod /system/lib/modules/ccci.ko
+#  Build-in Modified - E
+#   chown radio radio /sys/class/BOOT/BOOT/boot/md
+    chown radio radio /sys/kernel/ccci/boot
+
+#SeLinux
     mkdir /data/ccci_cfg 0770 system radio
     restorecon /data/ccci_cfg
     restorecon_recursive /protect_f
     restorecon_recursive /protect_s
-
+    
     # Encrypt phone function
     setprop vold.post_fs_data_done 1
-    
+
 service gsm0710muxd /system/bin/gsm0710muxd -s /dev/ttyC0 -f 512 -n 8 -m basic
     class core
     user root
-    group root
+    group radio cache inet misc
     disabled
     oneshot
 
 service gsm0710muxdmd2 /system/bin/gsm0710muxdmd2 -s /dev/ccci2_tty0 -f 512 -n 8 -m basic
     class core
     user root
-    group root
+    group radio cache inet misc
     disabled
     oneshot
-
+    
 service muxreport-daemon /system/bin/muxreport
     class core
     user radio
@@ -112,44 +119,44 @@ service permission_check /system/bin/permission_check
     oneshot
 
 service ccci_fsd /system/bin/ccci_fsd 0
-    user root
-    group root
+    user radio
+    group radio system
     class core
     oneshot
 
 service ccci2_fsd /system/bin/ccci_fsd 1
-    user root
-    group root
+    user radio
+    group  radio system
     class core
     oneshot
 
 service ccci_mdinit /system/bin/ccci_mdinit 0
-    user root
-    group root
+    user system
+    group radio system
     class core
     oneshot
 
 service ccci2_mdinit /system/bin/ccci_mdinit 1
-    user root
-    group root
+    user system
+    group radio system
     class core
     oneshot
 
 service ccci_rpcd /system/bin/ccci_rpcd 0
-    user root
-    group root
+    user radio
+    group radio system
     class core
     oneshot
 
 service ccci2_rpcd /system/bin/ccci_rpcd 1
-    user root
-    group root
+    user radio
+    group radio system
     class core
     oneshot
 
 service pppd_gprs /system/bin/pppd_dt /dev/ttyACM0 debug noauth refuse-eap usepeerdns nodetach
     user root
-    group root
+    group radio cache inet misc
     disabled
     oneshot
 
