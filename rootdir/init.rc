@@ -678,14 +678,6 @@ service netd /system/bin/netd
     socket mdns stream 0660 root system
     socket fwmarkd stream 0660 root inet
 
-service ril-daemon /system/bin/rild
-    class main
-    socket rild stream 660 root radio
-    socket sap_uim_socket1 stream 660 bluetooth bluetooth
-    socket rild-debug stream 660 radio system
-    user root
-    group radio cache inet misc audio log
-
 service debuggerd /system/bin/debuggerd
     class main
     writepid /dev/cpuset/system-background/tasks
